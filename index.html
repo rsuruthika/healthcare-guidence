@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindBridge | Accessible Mental Health Support</title>
+  <meta name="description" content="Accessible mental health support for students, youngsters, and grandparents.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">MindBridge</a>
+      <nav class="main-nav" aria-label="Main Navigation">
+        <a href="#students">Students</a>
+        <a href="#youngsters">Youngsters</a>
+        <a href="#grandparents">Grandparents</a>
+        <a href="#future-lab">Future Lab</a>
+        <a href="login.html">Login</a>
+        <a href="admin.html">Admin Dashboard</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div>
+        <p class="eyebrow">24/7 Inclusive Support Platform</p>
+        <h1>Accessible mental wellness support for every generation</h1>
+        <p class="hero-copy">Find trusted resources, talk through concerns, and get instant support actions from one place.</p>
+        <div class="hero-actions">
+          <a href="chat.html" class="btn btn-primary">Open Safe Chat</a>
+          <a href="call.html" class="btn btn-secondary">Emergency Help</a>
+        </div>
+      </div>
+      <div class="hero-card" id="mood-widget">
+        <h2>How are you feeling today?</h2>
+        <p>Track your mood privately. Your data stays in your browser.</p>
+        <div class="mood-buttons">
+          <button class="mood-btn" data-mood="Calm">Calm</button>
+          <button class="mood-btn" data-mood="Okay">Okay</button>
+          <button class="mood-btn" data-mood="Stressed">Stressed</button>
+          <button class="mood-btn" data-mood="Overwhelmed">Overwhelmed</button>
+        </div>
+        <p id="mood-status" class="muted">No mood logged yet.</p>
+        <p id="user-badge" class="muted"></p>
+      </div>
+    </section>
+
+    <section class="container content-section" id="students">
+      <h2>Support for Students</h2>
+      <p>Help for stress, exams, burnout, and emotional safety during academic life.</p>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Student Minds UK</h3>
+          <p>Peer support, student campaigns, and practical wellbeing resources.</p>
+          <a href="https://www.studentminds.org.uk/" target="_blank" rel="noopener noreferrer" class="card-link">Visit</a>
+        </article>
+        <article class="card">
+          <h3>NAMI for Students</h3>
+          <p>Mental health education and support for teens and young adults.</p>
+          <a href="https://www.nami.org/Your-Journey/Teens-Young-Adults" target="_blank" rel="noopener noreferrer" class="card-link">Visit</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="container content-section" id="youngsters">
+      <h2>Support for Youngsters</h2>
+      <p>Safe pathways for younger users with age-appropriate resources and actions.</p>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Childline</h3>
+          <p>Confidential 24/7 support for children and young people.</p>
+          <a href="childline.html" class="card-link">Open Childline Hub</a>
+        </article>
+        <article class="card">
+          <h3>YoungMinds</h3>
+          <p>Resources on feelings, school pressure, and emotional wellbeing.</p>
+          <a href="https://www.youngminds.org.uk/" target="_blank" rel="noopener noreferrer" class="card-link">Visit</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="container content-section" id="grandparents">
+      <h2>Support for Grandparents</h2>
+      <p>Tools and community resources for loneliness, grief, and emotional resilience.</p>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Age UK Mind & Body</h3>
+          <p>Guidance for healthy ageing and connected living.</p>
+          <a href="https://www.ageuk.org.uk/information-advice/health-wellbeing/mind-body/" target="_blank" rel="noopener noreferrer" class="card-link">Visit</a>
+        </article>
+        <article class="card">
+          <h3>Mental Health Foundation</h3>
+          <p>Evidence-based resources for older adults and caregivers.</p>
+          <a href="https://www.mentalhealth.org.uk/explore-mental-health/a-z-topics/older-people" target="_blank" rel="noopener noreferrer" class="card-link">Visit</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="container content-section" id="instant-support">
+      <h2>Instant Support Actions</h2>
+      <div class="action-grid">
+        <button id="start-chat-btn" class="btn btn-primary">Start Chat Session</button>
+        <button id="request-call-btn" class="btn btn-primary">Request Call Back</button>
+        <button id="load-resources-btn" class="btn btn-secondary">Load Healthy Resources</button>
+      </div>
+      <p id="action-status" class="status" aria-live="polite"></p>
+      <div id="resources-list" class="resources-list"></div>
+    </section>
+
+    <section class="container content-section" id="future-lab">
+      <h2>Future Lab Features</h2>
+      <div class="future-grid">
+        <article>
+          <h3>60-Second Breathing Coach</h3>
+          <p>Reset your nervous system with guided paced breathing.</p>
+          <button id="breathing-btn" class="btn btn-secondary">Start Breathing</button>
+          <p id="breathing-status" class="muted"></p>
+        </article>
+        <article>
+          <h3>Quick Exit Shield</h3>
+          <p>Instantly switch to a neutral website for privacy and safety.</p>
+          <a href="https://www.weather.com/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Quick Exit</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 MindBridge. Accessible support for all ages.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

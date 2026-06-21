@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindBridge | Childline Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container content-section" style="margin-top:2rem;">
+    <h1>Childline Support Hub</h1>
+    <p>Confidential and safe support for children and young people.</p>
+
+    <div class="future-grid">
+      <article class="card">
+        <h2>Live Chat</h2>
+        <p>Start a private chat with a support counselor.</p>
+        <a href="chat.html" class="btn btn-primary">Open Chat</a>
+      </article>
+
+      <article class="card">
+        <h2>Emergency Call</h2>
+        <p>Reach immediate help through emergency contact channels.</p>
+        <a href="call.html" class="btn btn-primary">Call Support</a>
+      </article>
+
+      <article class="card">
+        <h2>Resources</h2>
+        <p>Read practical guidance for emotional wellbeing.</p>
+        <a href="resources.html" class="btn btn-primary">Open Resources</a>
+      </article>
+    </div>
+
+    <section class="content-section" style="margin-top:1rem;">
+      <h2>Send Anonymous Feedback</h2>
+      <textarea id="feedbackInput" rows="4" style="width:100%; border:1px solid #dbe4f0; border-radius:10px; padding:0.6rem;" placeholder="Share what support would help you more..."></textarea>
+      <div style="margin-top:0.6rem;">
+        <button id="sendFeedbackBtn" class="btn btn-secondary">Send Feedback</button>
+      </div>
+      <p id="feedbackStatus" class="status" aria-live="polite"></p>
+    </section>
+
+    <a class="btn btn-secondary" href="index.html">Back Home</a>
+  </main>
+
+  <footer class="site-footer">
+    <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a></p>
+  </footer>
+
+  <script src="app-config.js"></script>
+  <script>
+    const API_BASE = window.MB_API_BASE || "http://localhost:3000";
+    const feedbackInput = document.getElementById("feedbackInput");
+    const feedbackStatus = document.getElementById("feedbackStatus");
+
+    document.getElementById("sendFeedbackBtn").addEventListener("click", async () => {
+      const feedback = feedbackInput.value.trim();
+      if (!feedback) {
+        feedbackStatus.textContent = "Please enter feedback first.";
+        feedbackStatus.style.color = "#b91c1c";
+        return;
+      }
+
+      feedbackStatus.textContent = "Submitting feedback...";
+      feedbackStatus.style.color = "#0f766e";
+      try {
+        await fetch(`${API_BASE}/feedback`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ feedback, source: "childline" })
+        });
+        feedbackStatus.textContent = "Feedback submitted. Thank you.";
+        feedbackInput.value = "";
+      } catch {
+        feedbackStatus.textContent = "Failed to submit feedback.";
+        feedbackStatus.style.color = "#b91c1c";
+      }
+    });
+  </script>
+</body>
+</html>
+
+

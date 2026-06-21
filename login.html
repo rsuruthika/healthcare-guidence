@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindBridge | Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container content-section" style="margin-top:2rem; max-width:520px;">
+    <h1>Login</h1>
+    <p class="muted">Choose a role account for demo access.</p>
+
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input id="username" type="text" required style="width:100%; padding:0.65rem; border:1px solid #dbe4f0; border-radius:10px; margin:0.35rem 0 0.9rem;">
+
+      <label for="password">Password</label>
+      <input id="password" type="password" required style="width:100%; padding:0.65rem; border:1px solid #dbe4f0; border-radius:10px; margin:0.35rem 0 0.9rem;">
+
+      <button class="btn btn-primary" type="submit">Login</button>
+      <button id="logoutBtn" class="btn btn-secondary" type="button">Logout</button>
+    </form>
+
+    <p id="loginStatus" class="status" aria-live="polite"></p>
+
+    <section class="content-section" style="margin-top:1rem;">
+      <h2>Role Access</h2>
+      <ul>
+        <li><strong>Student</strong>: General support access</li>
+        <li><strong>Counselor</strong>: Support and response role</li>
+        <li><strong>Admin</strong>: Analytics dashboard access</li>
+      </ul>
+      <p class="muted">Credentials are not displayed on this page for security.</p>
+    </section>
+
+    <a class="btn btn-secondary" href="index.html">Back Home</a>
+  </main>
+
+  <footer class="site-footer">
+    <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a></p>
+  </footer>
+
+  <script src="app-config.js"></script>
+  <script>
+    const API_BASE = window.MB_API_BASE || "http://localhost:3000";
+    const form = document.getElementById("loginForm");
+    const status = document.getElementById("loginStatus");
+
+    function setStatus(message, isError = false) {
+      status.textContent = message;
+      status.style.color = isError ? "#b91c1c" : "#0f766e";
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value;
+
+      setStatus("Logging in...");
+      try {
+        const res = await fetch(`${API_BASE}/auth/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+          throw new Error(data.message || "Login failed");
+        }
+
+        localStorage.setItem("mindbridge_token", data.token);
+        localStorage.setItem("mindbridge_user", JSON.stringify(data.user));
+        setStatus(`Logged in as ${data.user.name} (${data.user.role}).`);
+
+        if (data.user.role === "admin") {
+          window.setTimeout(() => {
+            window.location.href = "admin.html";
+          }, 700);
+        }
+      } catch (error) {
+        setStatus(error.message || "Login failed.", true);
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("mindbridge_token");
+      localStorage.removeItem("mindbridge_user");
+      setStatus("Logged out locally.");
+    });
+  </script>
+</body>
+</html>
+
+

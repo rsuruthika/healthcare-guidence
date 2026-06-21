@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindBridge | Emergency Call</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container content-section" style="margin-top:2rem; max-width:720px;">
+    <h1>Emergency Contact</h1>
+    <p>If you are in immediate danger, call local emergency services first.</p>
+
+    <div class="future-grid">
+      <article>
+        <h2>Childline Helpline</h2>
+        <p>Free and confidential support for children and young people.</p>
+        <a href="tel:1098" class="btn btn-primary">Call 1098</a>
+      </article>
+
+      <article>
+        <h2>Safety Checklist</h2>
+        <ul>
+          <li>Move to a safer place if needed.</li>
+          <li>Contact a trusted adult.</li>
+          <li>Keep emergency numbers ready.</li>
+          <li>Share your location if possible.</li>
+        </ul>
+      </article>
+    </div>
+
+    <button id="requestCallBtn" class="btn btn-secondary">Request Counseling Callback</button>
+    <p id="callStatus" class="status" aria-live="polite"></p>
+    <a class="btn btn-secondary" href="index.html">Back Home</a>
+  </main>
+
+  <footer class="site-footer">
+    <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a></p>
+  </footer>
+
+  <script src="app-config.js"></script>
+  <script>
+    const API_BASE = window.MB_API_BASE || "http://localhost:3000";
+    const status = document.getElementById("callStatus");
+
+    document.getElementById("requestCallBtn").addEventListener("click", async () => {
+      status.textContent = "Submitting call request...";
+      status.style.color = "#0f766e";
+      try {
+        const res = await fetch(`${API_BASE}/call/request`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" }
+        });
+        const data = await res.json();
+        status.textContent = data.message || "Request submitted.";
+      } catch {
+        status.textContent = "Could not submit request.";
+        status.style.color = "#b91c1c";
+      }
+    });
+  </script>
+</body>
+</html>
+
+

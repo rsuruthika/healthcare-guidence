@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindBridge | Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container content-section" style="margin-top:2rem;">
+    <h1>Admin Analytics Dashboard</h1>
+    <p class="muted">Only admin role can access this dashboard.</p>
+
+    <div class="action-grid" style="margin-bottom:1rem;">
+      <button id="refreshBtn" class="btn btn-primary">Refresh Analytics</button>
+      <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+      <a href="index.html" class="btn btn-secondary">Back Home</a>
+    </div>
+
+    <p id="adminStatus" class="status" aria-live="polite"></p>
+
+    <section class="future-grid">
+      <article class="card">
+        <h2>Overview</h2>
+        <ul id="overviewList"></ul>
+      </article>
+
+      <article class="card">
+        <h2>Analytics Counters</h2>
+        <ul id="analyticsList"></ul>
+      </article>
+    </section>
+
+    <section class="content-section" style="margin-top:1rem;">
+      <h2>Latest Feedback</h2>
+      <div id="feedbackList" class="resources-list"></div>
+    </section>
+
+    <section class="content-section" style="margin-top:1rem;">
+      <h2>Recent Mood Logs</h2>
+      <div id="moodList" class="resources-list"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a></p>
+  </footer>
+
+  <script src="app-config.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
+

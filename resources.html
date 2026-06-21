@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindBridge | Healthy Resources</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container content-section" style="margin-top:2rem; max-width:760px;">
+    <h1>Healthy Resources</h1>
+    <p class="muted">Trusted links for anxiety, stress, confidence, and emotional wellbeing.</p>
+    <p class="muted">All links below are external official resources and open third-party websites.</p>
+
+    <button id="fetchResourcesBtn" class="btn btn-primary">Load Latest Resources</button>
+    <div id="resourcesArea" class="resources-list" style="margin-top:1rem;"></div>
+
+    <a class="btn btn-secondary" href="index.html">Back Home</a>
+  </main>
+
+  <footer class="site-footer">
+    <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a></p>
+  </footer>
+
+  <script src="app-config.js"></script>
+  <script>
+    const API_BASE = window.MB_API_BASE || "http://localhost:3000";
+    const resourcesArea = document.getElementById("resourcesArea");
+
+    async function fetchResources() {
+      resourcesArea.textContent = "Loading...";
+      try {
+        const res = await fetch(`${API_BASE}/resources`);
+        const data = await res.json();
+        const resources = data.resources || [];
+        if (!resources.length) {
+          resourcesArea.textContent = "No resources available.";
+          return;
+        }
+
+        resourcesArea.innerHTML = `<ul>${resources
+          .map((item) => `<li><a href="${item.url}" target="_blank" rel="noopener noreferrer nofollow">${item.title}</a> <span class="muted">(External Official Resource)</span></li>`)
+          .join("")}</ul>`;
+      } catch {
+        resourcesArea.innerHTML = `<ul>
+          <li><a href="https://www.childline.org.uk/info-advice/your-feelings/anxiety/" target="_blank" rel="noopener noreferrer nofollow">Managing Anxiety</a> <span class="muted">(External Official Resource)</span></li>
+          <li><a href="https://www.childline.org.uk/info-advice/your-feelings/stress/" target="_blank" rel="noopener noreferrer nofollow">Dealing with Stress</a> <span class="muted">(External Official Resource)</span></li>
+        </ul><p class="muted">Showing fallback resources because server is unavailable.</p>`;
+      }
+    }
+
+    document.getElementById("fetchResourcesBtn").addEventListener("click", fetchResources);
+    fetchResources();
+  </script>
+</body>
+</html>
+
+

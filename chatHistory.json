@@ -1,0 +1,17 @@
+[
+  {
+    "type": "session_start",
+    "time": 1776147301275,
+    "source": "homepage"
+  },
+  {
+    "user": "Student",
+    "message": "hii",
+    "time": 1776148756102
+  },
+  {
+    "user": "Counselor",
+    "message": "heloo",
+    "time": 1776148766112
+  }
+]
